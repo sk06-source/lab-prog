@@ -10,8 +10,11 @@
 int main() {
     int sock = 0;
     struct sockaddr_in serv_addr;
-    char *data = "0101111110011111001010";
+    char data[MAX];
     char buffer[MAX] = {0};
+
+    printf("Enter the binary data: ");
+    scanf("%s", data);
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     serv_addr.sin_family = AF_INET;
@@ -21,6 +24,8 @@ int main() {
 
     send(sock, data, strlen(data), 0);
     read(sock, buffer, MAX);
+
+    printf("Received bit stuffed data from server: %s\n", buffer);
 
     close(sock);
     return 0;
